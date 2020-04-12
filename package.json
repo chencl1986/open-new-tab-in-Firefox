@@ -1,0 +1,29 @@
+{
+  "name": "open-new-tab-in-Firefox",
+  "version": "1.0.0",
+  "description": "This is a demo to fix the issue about how to open a new tag in Firefox after a http request.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chencl1986/open-new-tab-in-Firefox.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chencl1986/open-new-tab-in-Firefox/issues"
+  },
+  "homepage": "https://github.com/chencl1986/open-new-tab-in-Firefox#readme",
+  "dependencies": {
+    "he": "^1.2.0",
+    "isomorphic-fetch": "^2.2.1",
+    "koa": "^2.11.0",
+    "koa-router": "^8.0.8",
+    "koa-static": "^5.0.0",
+    "open": "^7.0.3"
+  }
+}

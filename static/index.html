@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <button id="method1">方法1：window.open</button>
+    <button id="method2">方法2：form.submit</button>
+    <button id="method3">方法3：a标签打开</button>
+    <button id="method4">方法4：服务端重定向</button>
+    <div id="formWrapper"></div>
+    <form id="redirectForm" action="/redirectForm" target="_blank"></form>
+  </body>
+
+  <script>
+    async function getFormStr() {
+      const response = await fetch('/getFormStr');
+      const result = await response.json();
+      document.querySelector('#formWrapper').innerHTML = result.formStr;
+      const action = document
+        .querySelector('#formWrapper form')
+        .getAttribute('action');
+      return action;
+    }
+
+    // 方法1：window.open
+    document
+      .querySelector('#method1')
+      .addEventListener('click', async function () {
+        const action = await getFormStr();
+        window.open(action);
+      });
+
+    // 方法2：form.submit
+    document
+      .querySelector('#method2')
+      .addEventListener('click', async function () {
+        const action = await getFormStr();
+        let formEle = document.createElement('form');
+        formEle.style.display = 'none';
+        formEle.method = 'post';
+        formEle.target = '_blank';
+        formEle.action = action;
+        document.body.appendChild(formEle);
+        formEle.submit();
+      });
+
+    // 方法3：a标签打开
+    document
+      .querySelector('#method3')
+      .addEventListener('click', async function () {
+        const action = await getFormStr();
+        let anchorEle = document.createElement('a');
+        anchorEle.href = action;
+        anchorEle.target = '_blank';
+        document.body.appendChild(anchorEle);
+        anchorEle.click();
+      });
+
+    // 方法4：服务端重定向
+    document
+      .querySelector('#method4')
+      .addEventListener('click', async function () {
+        document.querySelector('#redirectForm').submit();
+      });
+  </script>
+</html>
