@@ -16,13 +16,17 @@
   </body>
 
   <script>
+    // 获取支付宝支付的表单
     async function getFormStr() {
       const response = await fetch('/getFormStr');
       const result = await response.json();
+
       document.querySelector('#formWrapper').innerHTML = result.formStr;
+
       const action = document
         .querySelector('#formWrapper form')
         .getAttribute('action');
+
       return action;
     }
 
@@ -31,6 +35,7 @@
       .querySelector('#method1')
       .addEventListener('click', async function () {
         const action = await getFormStr();
+
         window.open(action);
       });
 
@@ -40,11 +45,14 @@
       .addEventListener('click', async function () {
         const action = await getFormStr();
         let formEle = document.createElement('form');
+
         formEle.style.display = 'none';
         formEle.method = 'post';
         formEle.target = '_blank';
         formEle.action = action;
+
         document.body.appendChild(formEle);
+
         formEle.submit();
       });
 
@@ -54,9 +62,12 @@
       .addEventListener('click', async function () {
         const action = await getFormStr();
         let anchorEle = document.createElement('a');
+
         anchorEle.href = action;
         anchorEle.target = '_blank';
+
         document.body.appendChild(anchorEle);
+
         anchorEle.click();
       });
 
